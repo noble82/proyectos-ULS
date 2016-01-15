@@ -1,0 +1,241 @@
+{% extends 'gabarit.html' %}
+
+{% block header %}
+	<h3><span>{{ msg.titre_uniforme_see_title }}</span></h3>
+{% endblock %}
+
+{% block aut_see %}
+	<div class="titreuniformelevel2">
+		{{ block.super}}
+	</div>
+{% endblock %}
+	
+{% block title %}
+	<div class=publisherlevel2>
+		<h3>{{ msg.titre_uniforme_detail | printf authority.name }}</h3>	
+			<table>
+			{% for auteur in authority.responsabilites.auteurs %}
+				{% if loop.first %}
+					<tr>
+						<td>{{ msg.aut_oeuvre_form_auteur }}</td>
+						<td>
+				{% else %}<br/>{% endif %}
+							<a href='index.php?lvl=author_see&id={{auteur.id}}'>{{ auteur.objet.display }}</a>
+				{% if loop.last %}
+						</td>
+					</tr>
+				{% endif %}
+			{% endfor %}
+		{% if authority.oeuvre_type_name %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_oeuvre_type }}</td>
+				<td>{{ authority.oeuvre_type_name }}</td>
+			</tr>
+		{% endif %}
+		{% if authority.oeuvre_nature_name %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_oeuvre_nature }}</td>
+				<td>{{ authority.oeuvre_nature_name }}</td>
+			</tr>
+		{% endif %}
+		{% for expression in authority.oeuvre_expressions_datas %}
+			{% if loop.first %}
+				<tr>
+					<td>{{ msg.aut_oeuvre_form_oeuvre_expression }}</td>
+					<td>
+			{% else %}
+				<br/>
+			{% endif %}
+						<a href='index.php?lvl=titre_uniforme_see&id={{ expression.id }}'>{{ expression.isbd_simple }}</a>
+			{% if loop.last %}
+					</td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+		{% for other_links_type in authority.other_links_datas %}
+			<tr>
+				<td>{{ other_links_type.label }}</td>
+				<td>
+			{% for other_link in other_links_type.elements %}
+				{% if !loop.first %}
+					<br/>
+				{% endif %}
+					<a href='index.php?lvl=titre_uniforme_see&id={{ other_link.id }}'>{{ other_link.isbd_simple }}</a>
+			{% endfor %}
+				</td>
+			</tr>
+		{% endfor %}		
+		{% for event in authority.oeuvre_events_datas %}
+			{% if loop.first %}
+				<tr>
+					<td>{{ msg.aut_oeuvre_form_oeuvre_event }}</td>
+					<td>
+			{% else %}
+				<br/>
+			{% endif %}
+					<a href='index.php?lvl=authperso_see&id={{ event.id }}'>{{ event.isbd }}</a>
+			{% if loop.last %}
+					</td>
+				</tr>
+			{% endif %}
+		{% endfor %}
+		{% if authority.form %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_forme }}</td>
+				<td>{{ authority.form }}</td>
+			</tr>
+		{% endif %}
+		{% if authority.get_form_label %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_forme_list }}</td>
+				<td>{{ authority.get_form_label }}</td>
+			</tr>
+		{% endif %}
+		{% if authority.date %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_date }}</td>
+				<td>{{ authority.date }}</td>
+			</tr>
+		{% endif %}
+		{% if authority.place %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_lieu }}</td>
+				<td>{{ authority.place }}</td>
+			</tr>
+		{% endif %}
+		{% if authority.subject %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_sujet }}</td>
+				<td>{{ authority.subject }}</td>
+			</tr>
+		{% endif %}
+		{% if authority.intended_termination == 1 %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_completude }}</td>
+				<td>Oeuvre finie</td>
+			</tr>
+		{% else %}
+			{% if authority.intended_termination == 2 %}
+				<tr>
+					<td>{{ msg.aut_oeuvre_form_completude }}</td>
+					<td>Oeuvre infinie</td>
+				</tr>
+			{% endif %}
+		{% endif %}		
+		{% if authority.intended_audience %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_public }}</td>
+				<td>{{ authority.intended_audience }}</td>
+			</tr>
+		{% endif %}
+		{% if authority.history %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_histoire }}</td>
+				<td>{{ authority.history }}</td>
+			</tr>
+		{% endif %}
+		{% if authority.context %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_contexte }}</td>
+				<td>{{ authority.context }}</td>
+			</tr>
+		{% endif %}
+		{% if authority.distrib %}
+			{% for distribution in authority.distrib %}
+				{% if loop.first %}
+					<tr>
+						<td>{{ msg.aut_oeuvre_form_distribution }}</td>
+						<td>
+				{% else %}; {% endif %}
+				{{ distribution.label }}
+				{% if loop.last %}
+						</td>
+					</tr>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		{% if authority.ref %}
+			{% for reference in authority.ref %}
+				{% if loop.first %}
+					<tr>
+						<td>{{ msg.aut_oeuvre_form_reference }}</td>
+						<td>
+				{% else %}; {% endif %}
+				{{ reference.label }}
+				{% if loop.last %}
+						</td>
+					</tr>
+				{% endif %}
+			{% endfor %}
+		{% endif %}		
+		{% if authority.tonalite %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_tonalite }}</td>
+				<td>{{ authority.tonalite }}</td>
+			</tr>
+		{% endif %}
+		
+		{% if authority.get_key_label %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_tonalite_list }}</td>
+				<td>{{ authority.get_key_label }}</td>
+			</tr>
+		{% endif %}
+		
+		{% if authority.coordinates %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_coordonnees }}</td>
+				<td>{{ authority.coordinates }}</td>
+			</tr>
+		{% endif %}
+		
+		{% if authority.equinox %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_equinoxe }}</td>
+				<td>{{ authority.equinox }}</td>
+			</tr>
+		{% endif %}
+		{% if authority.subdiv %}
+			{% for subdivision in authority.subdiv %}
+				{% if loop.first %}
+					<tr>
+						<td>Subdivision de forme</td>
+						<td>
+				{% else %}; {% endif %}
+				{{ subdivision.label }}
+				{% if loop.last %}
+						</td>
+					</tr>
+				{% endif %}
+			{% endfor %}
+		{% endif %}		
+		{% if authority.characteristic %}
+			<tr>
+				<td>{{ msg.aut_oeuvre_form_caracteristique }}</td>
+				<td>{{ authority.characteristic }}</td>
+			</tr>
+		{% endif %}
+		</table>
+		{% if authority.comment %}
+			<div class=aut_comment>{{ authority.comment | nl2br }}</div>
+		{% endif %}
+	</div>
+{% endblock %} 
+
+{% block details %}
+	{% if authority.hasChild %}
+		{{ authority.child_list }}
+	{% endif %}
+{% endblock %}
+
+{% block enrichment %}
+	{% if authority.enrichment %}
+		<h3>Editions numériques avec Galica et data.bnf</h3>
+		<div class='row'>
+			{% for gallica in authority.enrichment %}
+				<div class='colonne4'><a href='{{gallica.uri_gallica}}' target='_blank'>{{gallica.titre}}<br/>{{gallica.editeur}} ({{gallica.date}})</a></div>
+			{% endfor %}
+			<div class='row'></div>
+		</div>
+	{% endif %}
+{% endblock %}

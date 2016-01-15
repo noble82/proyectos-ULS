@@ -1,0 +1,26 @@
+{% extends 'gabarit.html' %}
+
+<!-- $Id: collection.html,v 1.2 2015-12-21 16:31:16 apetithomme Exp $ -->
+
+{% block element_content %}
+	<td valign="top">
+		{{ list_element.get_object_instance.isbd_entry }}<br/>
+		<br/>
+		{% if list_element.get_object_instance.editeur %}
+			<b>{{msg.164}} : </b>{{list_element.get_object_instance.editeur}}<br/> 
+		{% endif %}
+		{% if list_element.get_object_instance.collection_web %}
+			<b>{{msg.editeur_web}} : </b><a target="_blank" href="{{list_element.get_object_instance.collection_web}}">{{list_element.get_object_instance.collection_web}}</a><br/> 
+		{% endif %}
+		{% if list_element.get_object_instance.comment %}
+			<b>{{msg.707}} : </b>{{list_element.get_object_instance.comment}}<br/> 
+		{% endif %}
+		{% block indexing_concept %}
+			{{ block.super }}
+		{% endblock %}
+		{% block pperso %}
+			{{ block.super }}
+		{% endblock %}
+	</td>
+	
+{% endblock %}

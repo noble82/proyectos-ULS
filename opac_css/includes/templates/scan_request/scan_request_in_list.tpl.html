@@ -1,0 +1,73 @@
+<!-- $Id: scan_request_in_list.tpl.html,v 1.1 2016-01-13 15:41:42 apetithomme Exp $ -->
+<tr id="scan_request_{{scan_request.id}}_parent" style="cursor:pointer;">
+	<td>
+ 		<img hspace="3" border="0" onclick="expand_scan_request({{scan_request.id}}); return false;" id="scan_request_{{scan_request.id}}_img" name="imEx" class="img_plus" src="./getgif.php?nomgif=plus">
+	</td>
+	<td onclick='document.location="{{ scan_request.display_link }}"'>{{ scan_request.title }}</td>
+	<td onclick='document.location="{{ scan_request.display_link }}"'>{{ scan_request.formatted_date }}</td>
+	<td onclick='document.location="{{ scan_request.display_link }}"'>{{ scan_request.formatted_wish_date }}</td>
+	<td onclick='document.location="{{ scan_request.display_link }}"'>{{ scan_request.formatted_deadline_date }}</td>
+	<td onclick='document.location="{{ scan_request.display_link }}"'>{{ scan_request.priority.label }}</td>
+	<td onclick='document.location="{{ scan_request.display_link }}"'>{{ scan_request.status.label }}</td>
+</tr>
+
+<tr style="margin-bottom: 6px; display: none;" id="scan_request_{{scan_request.id}}_child">
+	<td></td>
+	<td colspan='6'>
+		{% if scan_request.desc %}
+			<div class='row'>
+				<div class='colonne25'>
+					{{ msg.scan_request_desc }} :
+				</div>
+				<div class='colonne'>
+					{{ scan_request.desc | nl2br }}
+				</div>
+			</div>
+		{% endif %}
+		{% if scan_request.comment %}
+			<div class='row'>
+				<div class='colonne25'>
+				{{ msg.scan_request_comment }} :
+				</div>
+				<div class='colonne'>
+					{{ scan_request.comment | nl2br }}
+				</div>
+			</div>
+		{% endif %}
+		<div class='row'>
+			<div class='colonne25'>
+				{{ msg.scan_request_update_date }} :
+			</div>
+			<div class='colonne'>
+				{{ scan_request.formatted_update_date }}
+			</div>
+		</div>
+		{% if scan_request.formatted_elapsed_time %}
+			<div class='row'>
+				<div class='colonne25'>
+				{{ msg.scan_request_elapsed_time }} :
+				</div>
+				<div class='colonne'>
+					{{ scan_request.formatted_elapsed_time }}
+				</div>
+			</div>
+		{% endif %}
+		{% for record in scan_request.linked_records %}
+			{% if loop.first %}
+				<div class='row'>
+					<div class='colonne25'>
+						{{ msg.scan_request_linked_records }} :
+					</div>
+					<div class='colonne'>
+			{% endif %}
+			{{ record.display }}
+			{% if record.comment %}
+				{{ record.comment | nl2br }}<br/>
+			{% endif %}
+			{% if loop.last %}
+					</div>
+				</div>
+			{% endif %}
+		{% endfor %}
+	</td>
+</tr>

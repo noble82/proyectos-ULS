@@ -1,0 +1,7 @@
+<!-- $Id: titre_uniforme.html,v 1.2 2015-12-22 14:15:44 apetithomme Exp $ -->
+
+{{ oeuvre.object_instance.name }} [{{ oeuvre.object_instance.oeuvre_nature_name }} {{ oeuvre.object_instance.oeuvre_type_name }}]
+{% for auteur in oeuvre.object_instance.authors.auteurs %}
+	/ {{ auteur.objet.display }}
+{% endfor %}
+{% if oeuvre.object_instance.date %}({{ oeuvre.object_instance.date }}){% endif %}

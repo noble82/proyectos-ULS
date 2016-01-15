@@ -1,0 +1,23 @@
+{% extends 'gabarit.html' %}
+
+<!-- $Id: publisher.html,v 1.2 2015-12-21 16:31:16 apetithomme Exp $ -->
+
+{% block element_content %}
+	<td valign="top">
+		{{ list_element.get_object_instance.isbd_entry }}<br/>
+		<br/>
+		{% if list_element.get_object_instance.link %}
+			<b>{{msg.editeur_web}} : </b>{{list_element.get_object_instance.link}}<br/>
+		{% endif %}
+		{% if list_element.get_object_instance.ed_comment %}
+			<b>{{msg.707}} : </b>{{list_element.get_object_instance.ed_comment}}<br/>
+		{% endif %}
+		{% block indexing_concept %}
+			{{ block.super }}
+		{% endblock %}
+		{% block pperso %}
+			{{ block.super }}
+		{% endblock %}
+	</td>
+{% endblock %}
+

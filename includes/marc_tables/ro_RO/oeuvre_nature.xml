@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE XMLlist SYSTEM "../../XMLlist.dtd"><!-- liste des types d'oeuvres ( FRBR )$Id: oeuvre_nature.xml,v 1.2 2015-10-13 15:28:24 ngantier Exp $ --><XMLlist>	<entry code="a" nature="expression">Expression</entry>	<entry code="b" nature="original">Oeuvre originale</entry></XMLlist>

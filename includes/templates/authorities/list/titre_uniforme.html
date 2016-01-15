@@ -1,0 +1,31 @@
+{% extends 'gabarit.html' %}
+
+<!-- $Id: titre_uniforme.html,v 1.2 2015-12-21 16:31:16 apetithomme Exp $ -->
+
+{% block element_content %}
+	<td valign="top">
+		{{ list_element.get_object_instance.get_isbd_simple }}<br/>
+		<br/>
+		{% if list_element.get_object_instance.comment %}
+			<b>{{msg.707}} : </b>{{list_element.get_object_instance.comment}}<br/> 
+		{% endif %}
+		{% for expression in list_element.get_object_instance.oeuvre_expressions %}
+			{% if loop.first %}
+				<b>{{ msg.search_extended_titre_uniforme_expression }} : </b>
+			{% else %}
+				{{ global.pmb_keyword_sep }}
+			{% endif %}
+			{{ expression.to_name}}
+			{% if loop.last %}
+				<br/>
+			{% endif %}
+		{% endfor %}
+		{% block indexing_concept %}
+			{{block.super}}
+		{% endblock %}
+		{% block pperso %}
+			{{ block.super }}
+		{% endblock %}
+	</td>
+	
+{% endblock %}

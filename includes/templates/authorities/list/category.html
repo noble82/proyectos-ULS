@@ -1,0 +1,37 @@
+{% extends 'gabarit.html' %}
+
+<!-- $Id: category.html,v 1.2 2015-12-21 16:31:16 apetithomme Exp $ -->
+
+{% block element_content %}
+	<td valign="top">
+		{{ list_element.object_instance.catalog_form }}<br/>
+		<br/>
+		{% if list_element.object_instance.has_parent %}
+			<b>{{ msg.categ_parent }}:</b>
+			<span>
+				<a href="./autorites.php?categ=see&sub=category&id={{ list_element.object_instance.parent_id }}">{{ list_element.object_instance.parent_libelle  }}</a>
+			</span>
+		{% endif %}
+		
+		{% if list_element.object_instance.has_child %}
+			<b>{{msg.aut_categs_children}}:</b>
+			<span>
+			{% for child in list_element.object_instance.listchilds %}
+				{% if !loop.first %}
+					{{ global.pmb_keyword_sep }}
+				{% endif %}
+				<a href="./autorites.php?categ=see&sub=category&id={{ child.id }}">{{ child.libelle }}</a>
+			{% endfor %}
+			</span><br/>
+		{% endif %}
+		{% if list_element.object_instance.commentaire %}
+			<b>{{msg.707}} : </b>{{ list_element.object_instance.commentaire }}<br/>
+		{% endif %}
+		{% block indexing_concept %}
+			{{block.super}}
+		{% endblock %}
+		{% block pperso %}
+			{{block.super}}
+		{% endblock %}
+	</td>
+{% endblock %}

@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id: authorities.xml,v 1.7 2015-12-24 14:59:33 ngantier Exp $ -->
+<pmbtabs>
+	<url_target>autorites.php?categ=search</url_target>
+	<default_mode>0</default_mode>
+	<tabs>
+		<tab title="msg:search_authorities" mode="0">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text" ifSearchEmpty="*" />
+					<class>searcher_autorities</class>
+				</field>
+			</searchFields>
+			<filterFields>
+				<field title="msg:authorities_statut_label" id="2">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_status">select id_authorities_statut, authorities_statut_label from authorities_statuts where authorities_statut_available_for like '%"1"%' order by authorities_statut_label</query>
+					</input>
+					<globalvar>authority_statut</globalvar>
+				</field>
+			</filterFields>
+		</tab>
+		<tab title="msg:133" mode="1">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text" ifSearchEmpty="*" />
+					<class>searcher_authorities_authors</class>
+				</field>
+				<field title="msg:search_extended_author_name" id="2">
+					<input type="text"/>
+					<class name="searcher_authorities_authors">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>1002</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+				<field title="msg:search_extended_author_concepts" id="3">
+					<input type="authoritie" ajax="onto" att_id_filter="http://www.w3.org/2004/02/skos/core#Concept" />
+					<class name="searcher_authorities_authors">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>1013</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+			</searchFields>			
+			<filterFields>
+				<field title="msg:search_extended_author_type" id="1">
+					<input type="list">
+						<options>
+							<option value="">msg:searcher_all_types</option>
+							<option value="70">msg:203</option>
+							<option value="71">msg:204</option>
+							<option value="72">msg:congres_libelle</option>
+						</options>	
+					</input>
+					<globalvar>type_autorite</globalvar>
+				</field>
+				<field title="msg:search_extended_author_statut" id="2">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_status">select id_authorities_statut, authorities_statut_label from authorities_statuts where authorities_statut_available_for like '%"1"%' order by authorities_statut_label</query>
+					</input>
+					<globalvar>authority_statut</globalvar>
+				</field>
+			</filterFields>
+		</tab>
+		<tab title="msg:134" mode="2">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text" ifSearchEmpty="*" />
+					<class>searcher_authorities_categories</class>
+				</field>
+				<field title="msg:search_extended_category_label" id="2">
+					<input type="text"/>
+					<class name="searcher_authorities_categories">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>2001</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+				<field title="msg:search_extended_category_concepts" id="3">
+					<input type="authoritie" ajax="onto" att_id_filter="http://www.w3.org/2004/02/skos/core#Concept" />
+					<class name="searcher_authorities_categories">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>2008</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+			</searchFields>
+			<filterFields>
+				<field title="msg:search_extended_category_thesaurus" id="1">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:thes_all">select id_thesaurus, libelle_thesaurus from thesaurus order by libelle_thesaurus</query>
+					</input>
+					<globalvar>id_thes</globalvar>
+				</field>
+				<field title="msg:search_extended_category_statut" id="2">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_status">select id_authorities_statut, authorities_statut_label from authorities_statuts where authorities_statut_available_for like '%"2"%' order by authorities_statut_label</query>
+					</input>
+					<globalvar>authority_statut</globalvar>
+				</field>
+			</filterFields>
+		</tab>
+		<tab title="msg:135" mode="3">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text" ifSearchEmpty="*" />
+					<class>searcher_authorities_publishers</class>
+				</field>
+				<field title="msg:search_extended_publisher_name" id="2">
+					<input type="text"/>
+					<class name="searcher_authorities_publishers">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>3001</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+				<field title="msg:search_extended_publisher_concepts" id="3">
+					<input type="authoritie" ajax="onto" att_id_filter="http://www.w3.org/2004/02/skos/core#Concept" />
+					<class name="searcher_authorities_publishers">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>3009</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+			</searchFields>
+			<filterFields>
+				<field title="msg:search_extended_publisher_statut" id="1">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_status">select id_authorities_statut, authorities_statut_label from authorities_statuts where authorities_statut_available_for like '%"3"%' order by authorities_statut_label</query>
+					</input>
+					<globalvar>authority_statut</globalvar>
+				</field>
+			</filterFields>
+		</tab>
+		<tab title="msg:136" mode="4">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text" ifSearchEmpty="*" />
+					<class>searcher_authorities_collections</class>
+				</field>
+				<field title="msg:search_extended_collection_name" id="2">
+					<input type="text"/>
+					<class name="searcher_authorities_collections">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>4001</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+				<field title="msg:search_extended_collection_concepts" id="3">
+					<input type="authoritie" ajax="onto" att_id_filter="http://www.w3.org/2004/02/skos/core#Concept" />
+					<class name="searcher_authorities_collections">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>4006</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>				
+			</searchFields>
+			<filterFields>
+				<field title="msg:search_extended_collection_statut" id="1">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_status">select id_authorities_statut, authorities_statut_label from authorities_statuts where authorities_statut_available_for like '%"4"%' order by authorities_statut_label</query>
+					</input>
+-					<globalvar>authority_statut</globalvar>
+				</field>
+			</filterFields>
+		</tab>
+		<tab title="msg:137" mode="5">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text" ifSearchEmpty="*" />
+					<class>searcher_authorities_subcollections</class>
+				</field>
+				<field title="msg:search_extended_subcollection_name" id="2">
+					<input type="text"/>
+					<class name="searcher_authorities_subcollections">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>5001</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+				<field title="msg:search_extended_subcollection_concepts" id="3">
+					<input type="authoritie" ajax="onto" att_id_filter="http://www.w3.org/2004/02/skos/core#Concept" />
+					<class name="searcher_authorities_subcollections">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>5007</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>				
+			</searchFields>
+			<filterFields>
+				<field title="msg:search_extended_subcollection_statut" id="1">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_status">select id_authorities_statut, authorities_statut_label from authorities_statuts where authorities_statut_available_for like '%"5"%' order by authorities_statut_label</query>
+					</input>
+-					<globalvar>authority_statut</globalvar>
+				</field>
+			</filterFields>
+		</tab>
+		<tab title="msg:333" mode="6">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text" ifSearchEmpty="*" />
+					<class>searcher_authorities_series</class>
+				</field>
+				<field title="msg:search_extended_serie_label" id="2">
+					<input type="text"/>
+					<class name="searcher_authorities_series">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>6001</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+				<field title="msg:search_extended_serie_concepts" id="3">
+					<input type="authoritie" ajax="onto" att_id_filter="http://www.w3.org/2004/02/skos/core#Concept" />
+					<class name="searcher_authorities_series">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>6002</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+			</searchFields>
+			<filterFields>
+				<field title="msg:search_extended_serie_statut" id="1">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_status">select id_authorities_statut, authorities_statut_label from authorities_statuts where authorities_statut_available_for like '%"6"%' order by authorities_statut_label</query>
+					</input>
+-					<globalvar>authority_statut</globalvar>
+				</field>
+			</filterFields>
+		</tab>
+		<tab title="msg:aut_menu_titre_uniforme" mode="7">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text" ifSearchEmpty="*" />
+					<class>searcher_authorities_titres_uniformes</class>
+				</field>
+				<field title="msg:search_extended_titre_uniforme_name" id="2">
+					<input type="text"/>
+					<class name="searcher_authorities_titres_uniformes">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>7003</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+				<field title="msg:search_extended_titre_uniforme_author" id="3">
+					<input type="authoritie" ajax="authors" selector="auteur"/>
+					<class name="searcher_authorities_titres_uniformes">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>7007</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+				<field title="msg:search_extended_titre_uniforme_interpreter" id="5">
+					<input type="authoritie" ajax="authors" selector="auteur"/>
+					<class name="searcher_authorities_titres_uniformes">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>7027</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+				<field title="msg:search_extended_titre_uniforme_concepts" id="4">
+					<input type="authoritie" ajax="onto" att_id_filter="http://www.w3.org/2004/02/skos/core#Concept" />
+					<class name="searcher_authorities_titres_uniformes">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>7025</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>				
+			</searchFields>
+			<filterFields>
+				<field title="msg:search_extended_titre_uniforme_statut" id="1">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_status">select id_authorities_statut, authorities_statut_label from authorities_statuts where authorities_statut_available_for like '%"7"%' order by authorities_statut_label</query>
+					</input>
+-					<globalvar>authority_statut</globalvar>
+				</field>
+				<field title="msg:search_extended_titre_uniforme_oeuvre_type" id="2">
+					<input type="marc_list">
+						<name>oeuvre_type</name>
+						<restrictquery allChoice="yes" titleAllChoice="msg:searcher_all_types">SELECT group_concat(distinct tu_oeuvre_type SEPARATOR ',') as all_oeuvre_type from titres_uniformes</restrictquery>				
+					</input>
+-					<globalvar>oeuvre_type_selector</globalvar>
+				</field>
+				<field title="msg:search_extended_titre_uniforme_oeuvre_nature" id="3">
+					<input type="marc_list">
+						<name>oeuvre_nature</name>
+						<restrictquery allChoice="yes" titleAllChoice="msg:searcher_all_natures">SELECT group_concat(distinct tu_oeuvre_nature SEPARATOR ',') as all_oeuvre_nature from titres_uniformes</restrictquery>				
+					</input>
+-					<globalvar>oeuvre_nature_selector</globalvar>
+				</field>
+			</filterFields>
+		</tab>
+		<tab title="msg:indexint_menu" mode="8">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text" ifSearchEmpty="*" />
+					<class>searcher_authorities_indexint</class>
+				</field>
+				<field title="msg:search_extended_indexint_label" id="2">
+					<input type="text"/>
+					<class name="searcher_authorities_indexint">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>8001</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+				<field title="msg:search_extended_indexint_concepts" id="3">
+					<input type="authoritie" ajax="onto" att_id_filter="http://www.w3.org/2004/02/skos/core#Concept" />
+					<class name="searcher_authorities_indexint">
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>8003</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+			</searchFields>
+			<filterFields>
+				<field title="msg:search_extended_indexint_pclassement" id="1">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_classements">select id_pclass, name_pclass from pclassement order by name_pclass</query>
+					</input>
+-					<globalvar>id_pclass</globalvar>
+				</field>
+				<field title="msg:search_extended_indexint_statut" id="2">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_status">select id_authorities_statut, authorities_statut_label from authorities_statuts where authorities_statut_available_for like '%"8"%' order by authorities_statut_label</query>
+					</input>
+-					<globalvar>authority_statut</globalvar>
+				</field>
+			</filterFields>
+		</tab>
+		<tab title="msg:ontology_skos_menu" mode="9">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text" ifSearchEmpty="*" />
+					<class>searcher_authorities_concepts</class>
+				</field>
+			</searchFields>
+			<filterFields>
+				<field title="msg:search_extended_concept_statut" id="1">
+					<input type="query_list">
+						<query allChoice="yes" titleAllChoice="msg:searcher_all_status">select id_authorities_statut, authorities_statut_label from authorities_statuts where authorities_statut_available_for like '%"10"%' order by authorities_statut_label</query>
+					</input>
+-					<globalvar>authority_statut</globalvar>
+				</field>
+			</filterFields>
+		</tab>
+		<tab title="msg:search_extended" mode="10" multiSearchCriteria="yes" />
+		<!-- 		Exemple Autorité perso -->
+		<!--
+		<tab title="Evenement" mode="1001">
+			<searchFields>
+				<field title="msg:global_search" id="1">
+					<input type="text"/>
+					<class name='searcher_authorities_authpersos'>
+						<fieldrestrict>
+							<field>code_champ</field>
+							<values>1001100</values>
+							<op>and</op>
+						</fieldrestrict>
+					</class>
+				</field>
+			</searchFields>
+			<filterFields>
+				
+			</filterFields>
+		</tab>
+		-->		
+	</tabs>
+</pmbtabs>
